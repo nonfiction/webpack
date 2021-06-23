@@ -1,9 +1,12 @@
 FROM node:latest
 
-WORKDIR /srv/
-
 RUN npm install -g webpack webpack-cli webpack-dev-server eslint stylelint
 
-EXPOSE 80
+ENV NODE_PATH=/srv/node_modules
 
-CMD webpack
+WORKDIR /srv/
+
+EXPOSE 80
+EXPOSE 443
+
+CMD ["webpack"]
