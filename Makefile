@@ -1,13 +1,5 @@
-IMAGE=nonfiction/webpack
-
-command:
-	@echo "docker run --rm -v $$(pwd):/srv $(IMAGE)"
-
-build:
-	DOCKER_BUILDKIT=1 docker build --tag $(IMAGE) .
-
-shell: 
-	docker run --rm -it $(IMAGE) /bin/bash
-
-push: 
-	docker push $(IMAGE)
+tag := v1
+update: build push
+build: ; docker buildx build -t nonfiction/webpack:$(tag) .
+push:	 ; docker push nonfiction/webpack:$(tag)
+shell: ; docker run -it --rm nonfiction/webpack:$(tag) bash
